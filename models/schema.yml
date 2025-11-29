@@ -1,0 +1,17 @@
+version: 2
+
+sources:
+  - name: gz_raw_data
+    database: lewagon-dataanalyst
+    schema: gz_raw_data       # Meu dataset no BigQuery
+    loader: bigquery
+    freshness: 
+      warn_after: {count: 12, period: hour}
+      error_after: {count: 24, period: hour}
+    tables:
+      - name: raw_gz_sales
+        loaded_at_field: updated_at
+      - name: raw_gz_product
+        loaded_at_field: updated_at
+      - name: raw_gz_ship
+        loaded_at_field: updated_at
