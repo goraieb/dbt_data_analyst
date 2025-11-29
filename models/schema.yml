@@ -10,8 +10,42 @@ sources:
       error_after: {count: 24, period: hour}
     tables:
       - name: raw_gz_sales
-        loaded_at_field: updated_at
+        identifier: sales
+        description: sales of Greenweez / one row per product_id found in each orders_id
+        loaded_at_field: date_date
+        columns:
+        - name: date_date
+          description: date of purchase
+        - name: orders_id
+          description: id of the purchase (order)
+        - name: pdt_id
+          description: id of the product
+        - name: revenue
+          description: revenue
+        - name: cost
+          description: cost
       - name: raw_gz_product
+        identifier: product
+        description: products of Greenweez / one row per product_id, incluses price informartion]
         loaded_at_field: updated_at
+        columns:
+        - name: products_id
+          description: id of the product 
+        - name: purchSE_PRICE
+          description: purchase price for each product
+
       - name: raw_gz_ship
+        identifier: ship
+        description: shipments of Greenweez
         loaded_at_field: updated_at
+        columns:
+        - name: orders_id
+          description: order ID 
+          name: shipping_fee
+          description: The shipping_fee
+          name: shipping_fee_1
+          description: repeat information, the sipping fee
+          name: logcost
+          description: the logistical cost
+          name: ship_cost
+          description: the shipment cost
