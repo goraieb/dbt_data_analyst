@@ -8,8 +8,8 @@ SELECT
     , orders_id
     ,round(sum(revenue),2) as revenue
     ,round(sum(quantity),2) as quantity
-    ,round(sum(cogs),2) as purchase_cost
-    ,round(revenue - purchase_cost, 2) as margin
+    ,round(sum(purchase_cost),2) as purchase_cost
+    ,round(SUM(revenue) - SUM(purchase_cost), 2) as margin
 FROM orders
 GROUP BY 
     date_date
