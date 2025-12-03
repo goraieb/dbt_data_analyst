@@ -8,7 +8,7 @@ With m as
 
 SELECT
     m.date_date
-    , COUNT(m.orders_id) as nb_transactions
+    , COUNT(p.orders_id) as nb_transactions
     , round(sum(m.revenue),2) as total_revenue
     , round(safe_divide(sum(m.revenue),COUNT(m.orders_id)),2) as avg_basket
     , round(sum(p.operational_margin),2) as total_operational_margin
