@@ -17,10 +17,13 @@ SELECT
             -SUM(A.ship_cost)
             )
         ,2) AS operational_margin
-    ,sum(B.quantity) AS quantity
+    ,SUM(B.quantity) AS quantity
+    ,SUM(B.margin) AS margin
+    ,SUM(A.shipping_fee) as shipping_fee
+    ,SUM(A.logcost) as log_cost
+    ,SUM(A.ship_cost) as ship_cost
 FROM B
 LEFT JOIN A ON A.orders_id = B.orders_id
-
 GROUP BY 
     B.orders_id
     ,B.date_date
