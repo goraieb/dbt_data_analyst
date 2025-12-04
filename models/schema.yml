@@ -1,0 +1,52 @@
+version: 2
+
+sources:
+  - name: gz_raw_data
+    database: lewagon-dataanalyst
+    schema: gz_raw_data
+    loader: bigquery
+    freshness: 
+      warn_after: {count: 12, period: hour}
+      error_after: {count: 24, period: hour}
+    tables:
+      - name: sales
+        description: sales of Greenweez / one row per product_id found in each orders_id
+        loaded_at_field: date_date
+        columns:
+          - name: date_date
+            description: date of purchase
+          - name: orders_id
+            description: id of the purchase (order)
+          - name: pdt_id
+            description: id of the product
+          - name: revenue
+            description: revenue
+          - name: cost
+            description: cost
+
+      - name: product
+        description: products of Greenweez / one row per product_id, includes price information
+        loaded_at_field: updated_at
+        columns:
+          - name: products_id
+            description: id of the product 
+          - name: purchSE_PRICE
+            description: purchase price for each product
+
+      - name: ship
+        description: shipments of Greenweez
+        loaded_at_field: updated_at
+        columns:
+          - name: orders_id
+            description: order ID, PK
+            tests:
+              - unique
+              - not_null
+          - name: shipping_fee
+            description: The shipping fee
+          - name: shipping_fee_1
+            description: repeat information, the shipping fee
+          - name: logcost
+            description: the logistical cost
+          - name: ship_cost
+            description: the shipment cost
