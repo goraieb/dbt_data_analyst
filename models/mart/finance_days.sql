@@ -1,4 +1,4 @@
-{{ config(materialized='table') }}
+
 
 
 With m as 
